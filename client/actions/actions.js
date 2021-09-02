@@ -17,9 +17,9 @@ export const ANSWERED_CORRECTLY = () => (dispatch, getState) => {
   const flashCardID = getState().flashCodes.flashCardList[0]._id
   console.log('line 18', userID, flashCardID)
   axios.post('/cards/answeredCorrect', {
-      userID: userID,
-      flashCardID: flashCardID
-    })
+    userID: userID,
+    flashCardID: flashCardID
+  })
     .then(({
       status
     }) => {
@@ -38,9 +38,9 @@ export const ANSWERED_INCORRECTLY = () => (dispatch, getState) => {
   const userID = getState().flashCodes.userID;
   const flashCardID = getState().flashCodes.flashCardList[0]._id
   axios.post('/cards/answeredIncorrect', {
-      userID: userID,
-      flashCardID: flashCardID
-    })
+    userID: userID,
+    flashCardID: flashCardID
+  })
     .then(({
       status
     }) => {
@@ -60,13 +60,13 @@ export const ADD_CREATED_USER_CARD = (problem, answer, category, is_public) => (
   const userID = getState().flashCodes.userID;
   console.log('actions - ADD_CREATED_USER_CARD', is_public);
   axios.post('/cards/create', {
-      username: username,
-      problem: problem,
-      answer: answer,
-      category: category,
-      userID: userID,
-      is_public: is_public
-    })
+    username: username,
+    problem: problem,
+    answer: answer,
+    category: category,
+    userID: userID,
+    is_public: is_public
+  })
     .then((info) => {
       if (info.status === 200) {
         console.log('the card was added successfully~!')
@@ -105,9 +105,9 @@ export const ADD_FLASH_CARD_LIST = () => (dispatch, getState) => {
   const userID = getState().flashCodes.userID;
   //query parameters.... or req.body
   axios.post('/cards/category/', {
-      categories: chosenTopics,
-      userID
-    })
+    categories: chosenTopics,
+    userID
+  })
     .then((info) => {
       console.log(info.data)
       if (info.status === 200) {
@@ -146,9 +146,9 @@ export const ADD_PUBLIC_FLASH_CARD_LIST = () => (dispatch, getState) => {
   const userID = getState().flashCodes.userID;
   //query parameters.... or req.body
   axios.post('/cards/publicCards/', {
-      categories: chosenTopics,
-      userID
-    })
+    categories: chosenTopics,
+    userID
+  })
     .then((info) => {
       if (info.status === 200) {
         const newArray = shuffle(info.data)
@@ -163,9 +163,9 @@ export const ADD_PUBLIC_FLASH_CARD_LIST = () => (dispatch, getState) => {
 
 export const LOGIN = (username, password) => (dispatch, getState) => {
   axios.post('/user/authUser/', {
-      username: username,
-      password: password
-    })
+    username: username,
+    password: password
+  })
     .then((info) => {
       console.log(info.data)
       if (info.status === 200) {
@@ -183,11 +183,22 @@ export const LOGIN = (username, password) => (dispatch, getState) => {
     });
 };
 
+export const OAUTH = () => (dispatch, getState) => {
+  console.log("in action")
+  axios.get('/user/auth')
+    .then((info) => {
+      console.log(info);
+    })
+    .catch((e) => {
+      alert("Error in Oauth");
+    });
+}
+
 export const SIGN_UP = (username, password) => (dispatch, getState) => {
   axios.post('/user/createUser/', {
-      username: username,
-      password: password
-    })
+    username: username,
+    password: password
+  })
     .then((info) => {
       console.log(info.data)
       if (info.status === 200 && info.data.data === true) {

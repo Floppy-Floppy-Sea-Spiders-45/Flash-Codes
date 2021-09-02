@@ -17,7 +17,7 @@ flashcardController.getAllPublicCards = (req, res, next) => {
 
   //if no category specified, return all flashcards belonging to the user or if are public
   if (body.length === 0) {
-    
+
     // console.log(body, body.length === 0);
     query += 'OR flash_cards.created_by_id=$1;';
     // console.log(query);
@@ -44,9 +44,9 @@ flashcardController.getAllPublicCards = (req, res, next) => {
     let categorySelect = 'OR ';
     for (let i = 0; i < body.length - 1; i++) {
       if (i === body.length - 2) {
-        categorySelect = categorySelect.concat(`category=$${i+1} AND flash_cards.created_by_id=$${body.length};`);
+        categorySelect = categorySelect.concat(`category=$${i + 1} AND flash_cards.created_by_id=$${body.length};`);
       } else {
-        categorySelect = categorySelect.concat(`category=$${i+1} AND flash_cards.created_by_id=$${body.length} OR `);
+        categorySelect = categorySelect.concat(`category=$${i + 1} AND flash_cards.created_by_id=$${body.length} OR `);
       }
     }
 
@@ -106,12 +106,12 @@ flashcardController.getUserCardsByCategory = (req, res, next) => {
     let categorySelect = 'WHERE ';
     for (let i = 0; i < body.length - 1; i++) {
       if (i === body.length - 2) {
-        categorySelect = categorySelect.concat(`category=$${i+1} AND flash_cards.created_by_id=$${body.length};`);
+        categorySelect = categorySelect.concat(`category=$${i + 1} AND flash_cards.created_by_id=$${body.length};`);
       } else {
-        categorySelect = categorySelect.concat(`category=$${i+1} AND flash_cards.created_by_id=$${body.length} OR `);
+        categorySelect = categorySelect.concat(`category=$${i + 1} AND flash_cards.created_by_id=$${body.length} OR `);
       }
     }
-  
+
     query = query.concat(categorySelect);
 
     db.query(query, body)
