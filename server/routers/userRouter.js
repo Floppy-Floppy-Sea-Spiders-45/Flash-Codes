@@ -15,7 +15,6 @@ router.post('/createUser/', userController.checkUserExists, userController.creat
 // post request to authenticate user
 router.post('/authUser/', userController.verifyUser, (req, res) => {
   return res.status(200).json({userID: res.locals.userID});
-  
 })
 
 
