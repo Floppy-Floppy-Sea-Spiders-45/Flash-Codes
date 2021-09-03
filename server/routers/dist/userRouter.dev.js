@@ -26,4 +26,15 @@ router.post('/authUser/', userController.verifyUser, function (req, res) {
     userID: res.locals.userID
   });
 });
+router.get('/auth', function (req, res) {
+  console.log('in /auth');
+  res.redirect("https://github.com/login/oauth/authorize?client_id=".concat(clientID, "&redirect_uri=http://localhost:8080/user/oauth"));
+});
+router.get('/oauth', userController.oauthUser, userController.fetchUser, userController.checkOauthExists, userController.createUser, userController.verifyUser, function (req, res) {
+  return res.status(200).json({
+    username: res.locals.username,
+    password: res.locals.gitID,
+    userID: res.locals.userID
+  }); // return res.redirect('/');
+});
 module.exports = router;
