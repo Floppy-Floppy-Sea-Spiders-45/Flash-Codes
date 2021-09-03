@@ -35,7 +35,7 @@ describe('Topics', () => {
   });
 
   it ('', () => {
-    const wrapper3 = shallow(<Topics {...props, chosenTopic: [0, 1, 2]} submit={submit} submitPublic={submitPublic} />)
+    const wrapper3 = shallow(<Topics {...props, chosenTopic: [1, 3]} submit={submit} submitPublic={submitPublic} />)
     wrapper3.find('input').at(0).simulate('click');
     wrapper3.find('input').at(1).simulate('click');
     wrapper3.find('input').at(2).simulate('click');
