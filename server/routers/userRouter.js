@@ -28,9 +28,8 @@ router.get('/auth', (req, res) => {
 })
 
 router.get('/oauth', userController.oauthUser, userController.fetchUser, userController.checkOauthExists, userController.createUser, userController.verifyUser, (req, res) => {
-  return res.status(200).json({ username: res.locals.username, password: res.locals.password, userID: res.locals.userID })
+  return res.status(200).json({ username: res.locals.username, password: res.locals.gitID, userID: res.locals.userID })
   // return res.redirect('/');
 })
-
 
 module.exports = router;
