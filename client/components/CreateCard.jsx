@@ -28,7 +28,7 @@ const CreateCard = props => {
       <div>
         <form>
           <select name="Topics" id="topics" required>
-            <option value="Unit 1">Unit 1</option>
+            <option id="topic-1" value="Unit 1">Unit 1</option>
             <option value="Unit 2">Unit 2</option>
             <option value="Unit 3">Unit 3</option>
             <option value="Unit 4">Unit 4</option>
@@ -43,7 +43,7 @@ const CreateCard = props => {
             Question: <input type="text" id='Question' name='Question' value={question} onChange={setQuestion} required />
             Answer: <input type="text" id='Answer' name='Answer' value={answer} onChange={setAnswer} required />
           </div>
-          <input type='button' value='Submit a New Card' name='Submit UserCard' onClick={() => { sendNewcard(props.userID) }} />
+          <input id='submit-new-card-button' type='button' value='Submit a New Card' name='Submit UserCard' onClick={() => { sendNewcard(props.userID) }} />
         </form>
         <div>
 
