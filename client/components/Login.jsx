@@ -16,9 +16,10 @@ const Login = props => {
   const [username, setUsername] = useInput('')
   const [password, setPassword] = useInput('')
 
-  function signMeUp() {
-    if (signUp === false) {
-      return <p> Don't have an account?<button id='loginStuff' className="primary" type="submit" onClick={(e) => setSignUp(true)}>SignUp</button></p>
+function signMeUp(){
+    if(signUp === false){
+        return <p> Don't have an account?<button id='signUpStuff' className="primary" type="submit" onClick={(e)=> setSignUp(true)}>SignUp</button></p> 
+
     }
   }
 

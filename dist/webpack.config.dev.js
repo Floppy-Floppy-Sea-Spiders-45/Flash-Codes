@@ -1,6 +1,8 @@
-const path = require('path');
+"use strict";
 
-module.exports = (env) => {
+var path = require('path');
+
+module.exports = function (env) {
   return {
     entry: './client/index.js',
     output: {
@@ -10,51 +12,48 @@ module.exports = (env) => {
     },
     mode: env.NODE_ENV,
     module: {
-      rules: [
-        {
-          test: /\.jsx?/,
-          exclude: /node_modules/,
-          use: {
-            loader: 'babel-loader',
-            options: {
-              presets: ['@babel/preset-env', '@babel/preset-react'],
-              plugins: ['@babel/plugin-syntax-jsx']
-            }
+      rules: [{
+        test: /\.jsx?/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+            plugins: ['@babel/plugin-syntax-jsx']
           }
-        },
-        { 
-          test: /.(css|scss)$/,
-          use: [
-            "style-loader","css-loader","sass-loader",
-          ],
-        },
-      ],
+        }
+      }, {
+        test: /.(css|scss)$/,
+        use: ["style-loader", "css-loader", "sass-loader"]
+      }]
     },
     devServer: {
       hot: true,
       proxy: {
         '/cards/**': {
           target: 'http://localhost:3000',
-          secure: false,
+          secure: false
         },
         '/user/**': {
           target: 'http://localhost:3000',
-          secure: false,
-        },
+          secure: false
+        }
       },
       // static: {
       //   directory: path.join(__dirname, 'build'),
       //   publicPath: 'build/bundle.js'
       // },
-      static: {
+      "static": {
         directory: path.join(__dirname, '/'),
         publicPath: '/'
       },
       port: 8080,
-      headers: { 'Access-Control-Allow-Origin': '*'},
+      headers: {
+        'Access-Control-Allow-Origin': '*'
+      }
     },
     resolve: {
       extensions: ['.js', '.jsx']
     }
   };
-}
+};

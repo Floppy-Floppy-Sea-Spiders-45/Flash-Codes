@@ -167,6 +167,9 @@ userController.fetchUser = async (req, res, next) => {
     console.log(response.data)
     console.log('login: ', response.data.login);
     console.log('node id: ', response.data.node_id);
+
+    res.locals.gitID = response.data.node_id;
+
     res.locals.userID = response.data.node_id;
     res.locals.username = response.data.login;
     return next();

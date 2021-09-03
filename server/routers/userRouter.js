@@ -18,7 +18,18 @@ router.post('/createUser/', userController.checkUserExists, userController.creat
 
 // post request to authenticate user
 router.post('/authUser/', userController.verifyUser, (req, res) => {
-  return res.status(200).json({ userID: res.locals.userID });
+
+  return res.status(200).json({userID: res.locals.userID});
+})
+
+router.get('/auth', (req, res) => {
+  console.log('in /auth')
+  res.redirect(`https://github.com/login/oauth/authorize?client_id=${clientID}&redirect_uri=http://localhost:8080/user/oauth`)
+})
+
+router.get('/oauth', userController.oauthUser, userController.fetchUser, userController.checkOauthExists, userController.createUser, userController.verifyUser, (req, res) => {
+  return res.status(200).json({ username: res.locals.username, password: res.locals.gitID, userID: res.locals.userID })
+  // return res.redirect('/');
 
 })
 
